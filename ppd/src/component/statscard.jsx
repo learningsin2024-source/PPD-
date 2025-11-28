@@ -1,17 +1,14 @@
-
-
-function Statscard({icon, title, value, trend}){
-
-    return (
-        <>
-        <div className=" bg-white shadow-sm rounded-xl p-4 flex flex-col gap-2 border">
-          <div className="flex items-center space-x-2 text-gray-600">  <span className="text-2xl">{icon}</span> <p className="text-sm font-medium">{title}</p> </div>
-          <p className="text-3xl font-bold text-gray-900">{value}</p><br/>
-          <p className="text-sm text-green-600">{trend}</p>
-
-        </div>
-        </>
-    )
+function Statscard({ icon, title, value, trend }) {
+  return (
+    <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full">
+      <div className="flex items-center gap-2 text-2xl">
+        <span>{icon}</span>
+        <p className="text-gray-600 font-medium">{title}</p>
+      </div>
+      <p className="text-3xl font-bold mt-4">{value}</p>
+      <p className="text-sm text-green-500 mt-2">{trend}</p>
+    </div>
+  );
 }
 
-export default Statscard
+export default Statscard;

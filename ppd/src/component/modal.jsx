@@ -2,28 +2,30 @@ function Modal({ isOpen, onClose, title, children, actions }) {
   if (!isOpen) return null;
 
   return (
-    <>
-      {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-20" onClick={onClose}></div>
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 font-bold text-xl"
+        >
+          ×
+        </button>
 
-      {/* Modal Box */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                      bg-white rounded-lg shadow-lg p-6 z-30 max-w-md w-full">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2>{title}</h2>
-          <button onClick={onClose}>X</button>
+        {/* Title */}
+        {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
+
+        {/* Content */}
+        <div className="mb-6">{children}</div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-end gap-3">
+          {actions && actions.map((action, index) => <div key={index}>{action}</div>)}
         </div>
-
-        {/* Body */}
-        <div>{children}</div>
-
-        {/* Footer (optional actions) */}
-        {actions && <div className="flex justify-end mt-4 space-x-2">{actions}</div>}
       </div>
-    </>
+    </div>
   );
 }
 
+export default Modal;
 
-export default Modal

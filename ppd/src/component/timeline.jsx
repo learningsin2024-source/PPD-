@@ -1,31 +1,20 @@
+function Timeline({ icon, status, text, time }) {
+  const statusColors = {
+    success: "text-green-500",
+    info: "text-blue-500",
+    warning: "text-yellow-500",
+    error: "text-red-500",
+  };
 
-
-function Timeline ({icon, status, text, time}){
-
-    return (
-
-        <>
-            <div className="flex flex-col space-y-6 border-l-4 border-gray-300 pl-6">
-                    <div className="relative"><p>{text}</p></div>
-                    <ul className="space-y-1">
-                        <li className="absolute -left-3 top-1 w-3 h-3 rounded-full 
-               bg-blue-500 flex items-center justify-center text-xs">{icon}</li>
-                        <li className="font-medium text-gray-800">{text}</li>
-                        <li className="text-sm text-gray-500">{time}</li>
-
-                    </ul>
-
-
-
-
-
-            </div>
-
-        
-        
-        
-        </>
-    )
+  return (
+    <div className="flex items-start gap-3">
+      <span className={`text-2xl mt-1 ${statusColors[status]}`}>{icon}</span>
+      <div>
+        <p className="text-gray-800 font-medium">{text}</p>
+        <p className="text-gray-500 text-sm">{time}</p>
+      </div>
+    </div>
+  );
 }
 
-export default Timeline
+export default Timeline;
