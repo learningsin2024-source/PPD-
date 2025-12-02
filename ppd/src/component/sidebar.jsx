@@ -16,7 +16,7 @@ function Sidebar({ sidelinks, isOpenMobile, setIsOpenMobile }) {
         {sidelinks.map((link) => (
           <li
             key={link.key}
-            className="cursor-pointer hover:text-blue-400 hover:underline flex items-center space-x-2"
+            className="cursor-pointer hover:text-blue-400 hover:underline text-xl flex items-center space-x-2"
           >
             <span>{link.icon}</span>
             {!col && <span>{link.name}</span>} 

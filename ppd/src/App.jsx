@@ -9,6 +9,8 @@ import Progressbar from "./component/progressbar";
 import Timeline from "./component/timeline";
 import Activityfeed from "./component/activityfeed";
 import QuickAddTask from "./component/quickaddtasks";
+import ProfileHeader from "./component/profieheader";
+import Avatar from './assets/Avatar.jpg';
 
 function App() {
   const [isOpenMobile, setIsOpenMobile] = useState(false);
@@ -68,7 +70,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       {/* Navbar */}
-      <Navbar links={links} isOpenMobile={isOpenMobile} setIsOpenMobile={setIsOpenMobile} />
+      <Navbar links={links} isOpenMobile={isOpenMobile} setIsOpenMobile={setIsOpenMobile} email = "abisoye@gmail.com" username ="Tyzon" created = "july" />
 
       <div className="flex flex-1">
         {/* Sidebar */}
@@ -77,6 +79,8 @@ function App() {
         {/* Main Content */}
         <main className="flex-1 p-6 overflow-auto bg-slate-100 min-h-screen">
           <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+
+          <ProfileHeader photo = {Avatar} username = "Abisoye" statuss= "Active ✅"/>
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -87,7 +91,7 @@ function App() {
           </div>
 
           {/* Progress Bar */}
-          <Progressbar value={30} color="bg-green-500" label="Storage Usage" showpercent={true} />
+          <Progressbar value={30} color="bg-slate-950" label="Storage Usage" showpercent={true} />
           <br />
 
           {/* Timeline */}
