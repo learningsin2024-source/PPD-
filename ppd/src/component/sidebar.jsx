@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Sidebar({ sidelinks, isOpenMobile, setIsOpenMobile }) {
   const [col, setCol] = useState(false); 
@@ -14,13 +15,13 @@ function Sidebar({ sidelinks, isOpenMobile, setIsOpenMobile }) {
     
       <ul className="flex flex-col m-3 text-white space-y-6">
         {sidelinks.map((link) => (
-          <li
+          <Link to = {link.route}
             key={link.key}
             className="cursor-pointer hover:text-blue-400 hover:underline text-xl flex items-center space-x-2"
           >
             <span>{link.icon}</span>
             {!col && <span>{link.name}</span>} 
-          </li>
+          </Link>
         ))}
       </ul>
 

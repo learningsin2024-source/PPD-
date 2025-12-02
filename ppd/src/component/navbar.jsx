@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Avatar from '../assets/Avatar.jpg';
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ links, isOpenMobile, setIsOpenMobile, username, email, created }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openHeader, setOpenHeader] = useState(false);
+
+
+    const navigate = useNavigate();
 
     function change () {
         setOpenHeader(!openHeader);
@@ -53,7 +57,7 @@ function Navbar({ links, isOpenMobile, setIsOpenMobile, username, email, created
                             <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 👤 {username}</li>
                             <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 📧 {email}</li>
                             <li  className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 🕒 {created}</li>
-                            <li><button className="p-2.5 m-2 bg-slate-950 text-white rounded">Edit Details</button></li>
+                            <li><button className="p-2.5 m-2 bg-slate-950 text-white rounded"  onClick={() => navigate("/profile")}>Edit Details</button></li>
 
 
                         </ul> </div>)}
