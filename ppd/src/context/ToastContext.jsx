@@ -3,7 +3,7 @@ import { createContext, useState, useCallback } from "react";
 
  export const ToastContext = createContext();
 
- function ToastProvider ({children, toasts, addToast, removeToast}) {
+ function ToastProvider ({children}) {
 
  const [toasts, setToasts] = useState([])
 

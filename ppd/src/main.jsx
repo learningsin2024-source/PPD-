@@ -4,11 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css'
 import App from './App.jsx'
 import { UserProvider } from './context/UserContext.jsx';
+import SidebarProvider from './context/SidebarContext.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <BrowserRouter>
      <UserProvider>
+      <SidebarProvider>
     <App />
+    </SidebarProvider>
     </UserProvider>
     </BrowserRouter>
   </StrictMode>,
