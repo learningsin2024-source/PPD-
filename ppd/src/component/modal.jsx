@@ -1,31 +1,44 @@
-function Modal({ isOpen, onClose, title, children, actions }) {
-  if (!isOpen) return null;
+
+
+function Modal({ isOpen, onClose, title, children, actions  }) {
+
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 font-bold text-xl"
+    <>
+
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-          ×
-        </button>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
 
-        {/* Title */}
-        {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
+            {/* Close Button */}
+            <button
+              className="absolute top-3 right-3 text-black hover:text-black"
+              onClick={onClose}
+            >
+              ✖
+            </button>
 
-        {/* Content */}
-        <div className="mb-6">{children}</div>
+            {/* Title */}
+            {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
 
-        {/* Action Buttons */}
-        <div className="flex justify-end gap-3">
-          {actions && actions.map((action, index) => <div key={index}>{action}</div>)}
+            {/* Content */}
+            <div className="mb-6">{children}</div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end gap-3">
+              {actions?.map((action, i) => (
+                <div key={i}>{action}</div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
 export default Modal;
-

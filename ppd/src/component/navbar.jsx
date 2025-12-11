@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useContext } from "react";
+
 import Avatar from '../assets/Avatar.jpg';
 import { useNavigate } from "react-router-dom";
+import {UserContext} from "../context/UserContext";
 
-function Navbar({ links, isOpenMobile, setIsOpenMobile, username, email, created }) {
+function Navbar({ links, isOpenMobile, setIsOpenMobile }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openHeader, setOpenHeader] = useState(false);
+    const {user, setUser} = useContext( UserContext);
 
 
     const navigate = useNavigate();
@@ -54,9 +58,9 @@ function Navbar({ links, isOpenMobile, setIsOpenMobile, username, email, created
 
                         <ul>
                           
-                            <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 👤 {username}</li>
-                            <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 📧 {email}</li>
-                            <li  className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 🕒 {created}</li>
+                            <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 👤 {user?.username}</li>
+                            <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 📧 {user?.email}</li>
+                            <li  className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950"> 🕒 {user?.createdAt}</li>
                             <li><button className="p-2.5 m-2 bg-slate-950 text-white rounded"  onClick={() => navigate("/profile")}>Edit Details</button></li>
 
 

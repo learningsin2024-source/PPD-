@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./component/navbar";
@@ -12,11 +12,37 @@ import Timeline from "./component/timeline";
 import Activityfeed from "./component/activityfeed";
 import QuickAddTask from "./component/quickaddtasks";
 import ProfileHeader from "./component/profieheader";
+import { UserContext } from "./context/UserContext.jsx";
+
 
 import Avatar from "./assets/Avatar.jpg";
 import Profile from "./pages/profile";
 
 function App() {
+
+const [IsOpen, setiSOpen] = useState(false)
+
+  function onClick(){
+    setiSOpen(!IsOpen)
+  }
+
+
+ const { setUser } = useContext(UserContext)
+                 
+                  useEffect(() => {
+  
+  setUser({username: "Tyzon", email: "johntyzon95@gmail.com", createdAt:"july", avatar : Avatar})}, 
+     [])
+
+
+const [profile, setProfile] = useState({ })
+
+  const [tasks, setTasks] = useState([])
+
+  const [notes, setNotes] = useState([])
+
+  const [timelineEvents, setTimelineEvents] = useState([])
+
   const [isOpenMobile, setIsOpenMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
@@ -67,23 +93,21 @@ function App() {
 
   // Navbar Links
   const links = [
-    { name: "Dashboard", route: "/" },
-    { name: "Tasks", route: "/tasks" },
-    { name: "Notes", route: "/notes" },
-    { name: "Timer", route: "/timer" },
+    { name: "Dashboard", route: "/", key: 1 },
+    { name: "Tasks", route: "/tasks", key: 2 },
+    { name: "Notes", route: "/notes", key: 3},
+    { name: "Timer", route: "/timer" , key: 4},
   ];
-
-  return (
+return (
     <>
+    
       {/* Top-level Layout */}
       <div className="flex flex-col h-screen">
         <Navbar
           links={links}
           isOpenMobile={isOpenMobile}
           setIsOpenMobile={setIsOpenMobile}
-          email="abisoye@gmail.com"
-          username="Tyzon"
-          created="july"
+         
         />
 
         <div className="flex flex-1">
@@ -102,9 +126,15 @@ function App() {
                 path="/"
                 element={
                   <>
+   
                     <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
                     <ProfileHeader photo={Avatar} username="Abisoye" statuss="Active ✅" />
+                    <button onClick={onClick} className="bg-amber-400">Open Modal</button>
+                    <Modal isOpen = {IsOpen} onClose={onClick}  title = "This is my modal, learning and continuity ">
+                            
+                      
+                       Modal box is here  </Modal>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                       <Statscard icon="📚" title="Notes Created" value={42} trend="+12 this week" />
@@ -174,6 +204,7 @@ function App() {
           </main>
         </div>
       </div>
+      
     </>
   );
 }
