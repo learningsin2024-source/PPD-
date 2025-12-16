@@ -6,9 +6,13 @@ import { UserContext } from "../context/UserContext";
 import { SidebarContext } from "../context/SidebarContext";
 
 function Navbar({ links }) {
+
+  
+
+
   const [openHeader, setOpenHeader] = useState(false);
   const { user } = useContext(UserContext);
-  const { isSidebarOpen, closeSidebar,toggleSidebar } = useContext(SidebarContext);
+  const { isSidebarOpen, closeSidebar,toggleSidebar, openSidebar } = useContext(SidebarContext);
 
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
@@ -23,6 +27,10 @@ function Navbar({ links }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+  console.log("Sidebar open:", isSidebarOpen);
+}, [isSidebarOpen]);
 
   return (
     <nav className="w-full bg-slate-950 z-20 top-0 border-b border-gray-700">

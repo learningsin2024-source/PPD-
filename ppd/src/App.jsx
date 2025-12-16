@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+import { tasks, habits } from "./data.js";
 
 import Navbar from "./component/navbar";
 import Sidebar from "./component/sidebar";
@@ -35,9 +36,21 @@ const [IsOpen, setiSOpen] = useState(false)
      [])
 
 
+const tasksCreated = tasks.length;
+const tasksCompleted = tasks.filter(t => t.status === "done").length;
+const tasksPending = tasks.filter(t => t.status === "pending").length;
+const completionPercent = tasksCreated === 0 ? 0 : Math.round((tasksCompleted / tasksCreated) * 100);
+
+const totalHabits = habits.length;
+const habitsDoneToday = habits.filter(h => h.status === "done").length;
+const habitsPending = habits.filter(h => h.status === "pending").length;
+const habitStreak = "🔥"; 
+
+
+
 const [profile, setProfile] = useState({ })
 
-  const [tasks, setTasks] = useState([])
+  const [taskss, setTasks] = useState([])
 
   const [notes, setNotes] = useState([])
 
@@ -137,10 +150,18 @@ return (
                        Modal box is here  </Modal>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                      <Statscard icon="📚" title="Notes Created" value={42} trend="+12 this week" />
-                      <Statscard icon="✅" title="Tasks Completed" value={18} trend="+4 today" />
-                      <Statscard icon="⏱️" title="Focus Hours" value="3h 20m" trend="+40 min" />
-                      <Statscard icon="📈" title="Productivity Score" value="87%" trend="+5%" />
+                      <Statscard icon="📝" title="Tasks Created" value={tasksCreated} trend="+X this week" />
+                      <Statscard icon="✅" title="Tasks Completed" value={tasksCompleted} trend="+X this week" />
+                      <Statscard icon="⏳" title="Tasks Pending" value={tasksPending} trend="0 change" />
+                      <Statscard icon="📊" title="Completion %" value={`${completionPercent}%`} trend="+X%" />
+
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+                       <Statscard icon="🔄" title="Total Habits" value={totalHabits} trend="+X this week" />
+                       <Statscard icon="✅" title="Habits Done Today" value={habitsDoneToday} trend="Compare to yesterday" />
+                       <Statscard icon="⏳" title="Habits Pending" value={habitsPending} trend="0 change" />
+                       <Statscard icon="🔥" title="Habit Streak" value={habitStreak} trend="" />
                     </div>
 
                     <Progressbar value={30} color="bg-slate-950" label="Storage Usage" showpercent={true} />

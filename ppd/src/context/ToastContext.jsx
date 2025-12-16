@@ -9,7 +9,7 @@ import { createContext, useState, useCallback } from "react";
 
  
 function addToast(message, type) {
-  const id = Date.now(); // unique id
+  const id = Date.now(); 
 
   const newToast = { id, message, type };
 
