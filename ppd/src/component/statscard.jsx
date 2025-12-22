@@ -10,7 +10,7 @@ function Statscard({ icon, title, value, trend }) {
         <p className="text-gray-600 font-light">{title}</p>
       </div>
       <p className="text-xl font-bold mt-4">{value}</p>
-      <p className="text-sm text-green-500 mt-2">{trend}</p>
+      <p className="text-lg text-green-500 mt-2">{trend}</p>
     </div>
   );
 }
