@@ -48,7 +48,7 @@ function Sidebar({ sidelinks }) {
               onClick={closeSidebar}
               className="flex items-center space-x-2 hover:text-blue-400"
             >
-              <span>{link.icon}</span>
+              <span className="text-2xl">{link.icon}</span>
               <span>{link.name}</span>
             </Link>
           ))}

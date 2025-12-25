@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState } from "react"
 
-function AddTaskForm({ addTask }) {
+function AddHabitForm({addHabit}) {
+
+
   const [showModal, setShowModal] = useState(false);
-  const [taskText, setTaskText] = useState("");
+  const [habitText, setHabitText] = useState("");
 
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   const handleSubmit = () => {
-    if (taskText.trim() === "") return; // ignore empty input
-    addTask(taskText); // call parent function
-    setTaskText("");   // clear input
+    if (habitText.trim() === "") return; // ignore empty input
+    addHabit(habitText); // call parent function
+    setHabitText("");   // clear input
     handleClose();     // close modal
   };
 
@@ -19,10 +21,10 @@ function AddTaskForm({ addTask }) {
       {/* Button to open modal */}
       <button
         onClick={handleOpen}
-        className="p-3 mb-2 rounded bg-green-500 text-white hover:bg-blue-800 transition"
+        className="p-3 mb-2 rounded bg-blue-500 text-white hover:bg-blue-800 transition"
         type="button"
       >
-        Add Task
+        Add Habit 
       </button>
 
       {/* Modal Overlay */}
@@ -36,12 +38,12 @@ function AddTaskForm({ addTask }) {
 
           {/* Modal Content */}
           <div className="relative bg-white rounded shadow-lg w-96 max-w-full p-6 z-10 flex flex-col space-y-4">
-            <h2 className="text-xl font-semibold">Add New Task</h2>
+            <h2 className="text-xl font-semibold">Add New Habit</h2>
             <input
               type="text"
               placeholder="Write task here"
-              value={taskText}
-              onChange={(e) => setTaskText(e.target.value)}
+              value={habitText}
+              onChange={(e) => setHabitText(e.target.value)}
               className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
             />
             <div className="flex justify-end space-x-2">
@@ -67,4 +69,4 @@ function AddTaskForm({ addTask }) {
   );
 }
 
-export default AddTaskForm;
+export default AddHabitForm
