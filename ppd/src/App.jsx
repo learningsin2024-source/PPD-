@@ -12,105 +12,15 @@ import { UserContext } from "./context/UserContext.jsx";
 import TaskList from "./component/TaskList.jsx";
 import HabitList from "./component/HabitList.jsx";
 import AddHabitForm from "./component/AddHabitForm.jsx";
+import { TaskContext } from "./context/TaskContext.jsx";
+import { HabitContext } from "./context/HabitContext.jsx";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "work on my react js skill", completed: true },
-    { id: 2, title: "learn typescript", completed: false },
-  ]);
-
-  const addTask = (title) => {
-    const newTask = { id: Date.now(), title, completed: false };
-    setTasks([...tasks, newTask]);
-  };
+ 
+ const {tasks, setTasks, addTask, totalTasks, completedTasks, pendingTasks,completionPercentage, } = useContext(TaskContext);
+const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habitDoneToday} = useContext(HabitContext);
 
 
-  //Habits
-const today = new Date().toISOString().slice(0, 10);
-
-const [habits, setHabits] = useState([
-  {
-    id: Date.now(),
-    title: "Working out",
-    history: [today],
-  },
-  {
-    id: Date.now() + 1,
-    title: "Reading",
-    history: [today],
-  },
-  {
-    id: Date.now() + 2,
-    title: "Meditation",
-    history: [],
-  }
-]);
-
-const addHabit = (title) => {
-
-  const newHabit =  {
-    id: Date.now(),
-    title, 
-    history: [today],
-  }
-
-  setHabits([...habits, newHabit])
-}
-
-
-const totalHabits = habits.length
-const habitDoneToday = habits.filter((h) => h.history.includes(today)).length
-const activeStreakCount = habits.filter((h) => h.history.includes(today)).length 
-const habitCompletion = (habitDoneToday / totalHabits) * 100;
-
-
-
-
-
-
-
-
-
-// streak 
-const DAY_MS = 24 * 60 * 60 * 1000;
-const toDate = (d) => new Date(d);
-const addDays = (date, days) =>
-  new Date(date.getTime() + days * DAY_MS)
-    .toISOString()
-    .slice(0, 10);
-
-const getCurrentStreak = (history, today) => {
-  if (!history.includes(today)) return 0;
-
-  let streak = 1;
-  let currentDate = today;
-
-  while (true) {
-    const prevDate = addDays(new Date(currentDate), -1);
-    if (history.includes(prevDate)) {
-      streak++;
-      currentDate = prevDate;
-    } else {
-      break;
-    }
-  }
-
-  return streak;
-};
-
-//Active Habit count
-
-
-const getActiveHabitsCount = (habits, today) =>
-  habits.filter((h) => h.history.includes(today)).length;
-
-  // Task stats
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter((t) => t.completed).length;
-  const pendingTasks = totalTasks - completedTasks;
-  const completionPercentage =
-    totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
-    const taskCompletion = (completedTasks / totalTasks) * 100;
 
   // Sidebar and Navbar links
   const sidelinks = [
