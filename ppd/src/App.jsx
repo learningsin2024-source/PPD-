@@ -1,14 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
+
 import Navbar from "./component/navbar";
 import Sidebar from "./component/sidebar";
 import Statscard from "./component/statscard";
 import Progressbar from "./component/progressbar";
 import ProfileHeader from "./component/profieheader";
 import AddTaskForm from "./component/AddTaskForm.jsx";
-import Avatar from "./assets/Avatar.jpg";
-import { UserContext } from "./context/UserContext.jsx";
+import ProfilePage from "./component/ProfilePage.jsx";
+
+
 import TaskList from "./component/TaskList.jsx";
 import HabitList from "./component/HabitList.jsx";
 import AddHabitForm from "./component/AddHabitForm.jsx";
@@ -38,17 +40,11 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
     { name: "Timer", route: "/timer", key: 4 },
   ];
 
-  const { setUser } = useContext(UserContext);
-  useEffect(() => {
-    setUser({
-      username: "Tyzon",
-      email: "johntyzon95@gmail.com",
-      createdAt: "July",
-      avatar: Avatar,
-    });
-  }, []);
-
+  
+   
+    
   return (
+
     <div className="flex flex-col h-screen">
       <Navbar links={links} isOpenMobile={false} setIsOpenMobile={() => {}} />
 
@@ -56,8 +52,10 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
         <Sidebar sidelinks={sidelinks} isOpenMobile={false} setIsOpenMobile={() => {}} />
 
         <main className="flex-1 p-6 overflow-auto bg-slate-100 min-h-screen relative">
-          {/* Header */}
-          <ProfileHeader photo={Avatar} username="Abisoye" statuss="Active ✅" />
+           <Routes>
+      <Route path="/" element={<>
+        {/* Header */}
+          <ProfileHeader  username="Abisoye" statuss="Active ✅" />
          <div className="space-x-2.5">
           {/* Add Task Form */}
           <AddTaskForm addTask={addTask} />
@@ -107,9 +105,13 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
           
                          <HabitList habits={habits} setHabits={setHabits} today={today}/><br/>
                          <TaskList tasks={tasks} setTasks={setTasks} />
-       
+      
+      </>} />
 
-         
+        
+       <Route path="/profile" element={<ProfilePage />} />
+    </Routes>
+          
         </main>
       </div>
     </div>

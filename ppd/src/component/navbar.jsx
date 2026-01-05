@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import Avatar from '../assets/Avatar.jpg';
 import { UserContext } from "../context/UserContext";
 import { SidebarContext } from "../context/SidebarContext";
 
@@ -11,7 +10,7 @@ function Navbar({ links }) {
 
 
   const [openHeader, setOpenHeader] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const { isSidebarOpen, closeSidebar,toggleSidebar, openSidebar } = useContext(SidebarContext);
 
   const navigate = useNavigate();
@@ -58,7 +57,7 @@ function Navbar({ links }) {
         <div className="flex items-center space-x-4 relative">
           <img
             onClick={() => setOpenHeader(!openHeader)}
-            src={Avatar}
+            src={user.avatar}
             alt="User Avatar"
             className="w-10 h-10 rounded-full cursor-pointer"
             aria-expanded={openHeader}
@@ -75,7 +74,7 @@ function Navbar({ links }) {
               <ul>
                 <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">👤 {user?.username}</li>
                 <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">📧 {user?.email}</li>
-                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">🕒 {user?.createdAt}</li>
+                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">🕒 {user?.joinedDate}</li>
                 <li>
                   <button
                     className="p-2 m-2 bg-slate-950 text-white rounded w-full"
@@ -97,6 +96,7 @@ function Navbar({ links }) {
           >
             ☰
           </button>
+    
         </div>
       </div>
     </nav>

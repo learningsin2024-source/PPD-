@@ -1,21 +1,62 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect} from "react";
+
+
+const USERS_KEY = "ppd_user";
+
+
+
+const defaultUser = {
+  username: "Guest",
+  email: "guest@example.com",
+  avatar: "",
+  joinedDate: new Date().toLocaleDateString()
+};
+
+
+
+
+export function loadUser() {
+  try {
+    const raw = localStorage.getItem(USERS_KEY);
+    if (!raw) return defaultUser;
+
+    const parsed = JSON.parse(raw);
+
+
+    if (parsed === null || typeof parsed !== "object") {
+      return defaultUser;
+    }
+
+    return parsed;
+  } catch (error) {
+    console.error("Failed to load user:", error);
+    return defaultUser;
+  }
+}
 
 
 export const UserContext = createContext();
 
 
-export function UserProvider ({children}) {
-    const [user, setUser] = useState({
-        username : "",
-        email : "",
-        avatar : "", 
-        createdAt : "", 
-    })
+function UserProvider ({children}) {
+    const [user, setUser] = useState(() => loadUser())
+
+   useEffect(() => {
+     localStorage.setItem(USERS_KEY, JSON.stringify(user));
+   }, [user]);
+
+   function updateUser(newuser){
+ 
+      setUser(prev => ( {
+          ...prev, ...newuser
+      } ))
+
+     }
 
 
     return (
 
-          <UserContext.Provider value={{ user, setUser }}>
+          <UserContext.Provider value={{ user, updateUser }}>
       {children}
     </UserContext.Provider>
   );
@@ -23,3 +64,5 @@ export function UserProvider ({children}) {
 
 }
 
+export default UserProvider;
+ 

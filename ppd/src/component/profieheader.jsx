@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
-function ProfileHeader({ photo, username, statuss }) {
+function ProfileHeader({ statuss }) {
   const [icons, setIcons] = useState(false);
+
+  const {user} = useContext(UserContext)
+
 
   return (
     <>
@@ -10,13 +14,13 @@ function ProfileHeader({ photo, username, statuss }) {
         {/* Left side */}
         <div className="flex items-center space-x-4">
           <img
-            src={photo}
+            src={user.avatar}
             alt="Profile"
             className="w-14 h-14 rounded-full border border-slate-700"
           />
 
           <div className="flex flex-col">
-            <p className="text-white text-lg font-semibold">{username}</p>
+            <p className="text-white text-lg font-semibold">{user.username}</p>
             <p className="text-gray-400 text-sm">{statuss}</p>
           </div>
         </div>
