@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 
-import Navbar from "../component/navbar";
-import Sidebar from "../component/sidebar";
 import Statscard from "../component/statscard";
 import Progressbar from "../component/progressbar";
 import ProfileHeader from "../component/profieheader";
@@ -17,22 +15,7 @@ import { HabitContext } from "../context/HabitContext.jsx";
 
 function Dashboard(){
 
-         // Sidebar and Navbar links
-  const sidelinks = [
-    { key: 1, name: "Dashboard", icon: "🏠", route: "/" },
-    { key: 2, name: "Tasks", icon: "✅", route: "/tasks" },
-    { key: 3, name: "Notes", icon: "📝", route: "/notes" },
-    { key: 4, name: "Timer", icon: "⏱", route: "/timer" },
-    { key: 5, name: "Settings", icon: "⚙️", route: "/settings" },
-  ];
-
-  const links = [
-    { name: "Dashboard", route: "/", key: 1 },
-    { name: "Tasks", route: "/tasks", key: 2 },
-    { name: "Notes", route: "/notes", key: 3 },
-    { name: "Timer", route: "/timer", key: 4 },
-  ];
-
+ 
   
      
 const {tasks, setTasks, addTask, totalTasks, completedTasks, pendingTasks,completionPercentage, } = useContext(TaskContext);
@@ -45,12 +28,7 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
 
     return (
         <>
-        <div className="flex flex-col h-screen">
-      <Navbar links={links} isOpenMobile={false} setIsOpenMobile={() => {}} />
-
-      <div className="flex flex-1">
-        <Sidebar sidelinks={sidelinks} isOpenMobile={false} setIsOpenMobile={() => {}} />
-            <main className="flex-1 p-6 overflow-auto bg-slate-100 min-h-screen relative">
+    
         
         {/* Header */}
           <ProfileHeader  username="Abisoye" statuss="Active ✅" />
@@ -103,9 +81,7 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
           
                          <HabitList habits={habits} setHabits={setHabits} today={today}/><br/>
                          <TaskList tasks={tasks} setTasks={setTasks} />
-      </main>
-   </div>
-   </div>
+ 
       </>
       
       

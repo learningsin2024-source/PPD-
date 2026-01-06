@@ -1,7 +1,7 @@
 function TaskItem({ task, callbacks }) {
   if (!task) return null; // safety check
 
-  const { id, title, completed } = task;
+  const { id, title, completed,completedAt } = task;
   const { onToggle, onDelete } = callbacks;
 
   return (
@@ -13,6 +13,7 @@ function TaskItem({ task, callbacks }) {
           onChange={() => onToggle(id)}
         />
         <p className={completed ? "line-through text-gray-400" : ""}>{title}</p>
+      {console.log(completedAt)}
       </div>
       <button
         onClick={() => onDelete(id)}
