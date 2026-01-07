@@ -1,13 +1,23 @@
 import TaskItem from "./TaskItems";
 
 function TaskList({ tasks, setTasks }) {
-  const toggleTask = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
+const toggleTask = (id) => {
+  setTasks((prev) =>
+    prev.map((task) => {
+      if (task.id !== id) return task;
+
+      const isCompleting = !task.completed;
+
+      return {
+        ...task,
+        completed: isCompleting,
+        completedAt: isCompleting
+          ? new Date().toISOString()
+          : null,
+      };
+    })
+  );
+};
 
   const handleDelete = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
