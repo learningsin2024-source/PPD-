@@ -18,7 +18,7 @@ function Dashboard(){
  
   
      
-const {tasks, setTasks, addTask, totalTasks, completedTasksCount, pendingTasks,completionPercentage, todayVsYesterdayInsight } = useContext(TaskContext);
+const {tasks, setTasks, addTask, totalTasks, completedTasksCount, pendingTasks,completionPercentage, todayVsYesterdayInsight, mostProductiveDayInsight } = useContext(TaskContext);
 const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habitDoneToday} = useContext(HabitContext);
 
 
@@ -61,6 +61,21 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
     title="Completion %"
     trend={`${((habitDoneToday / totalHabits) * 100).toFixed(0)}%`}
   />
+</div>
+<div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">
+  <span className="text-2xl">📅</span>
+
+  <div>
+    <p className="font-medium text-gray-800">
+      {mostProductiveDayInsight.message}
+    </p>
+
+    {mostProductiveDayInsight.day && (
+      <p className="text-sm text-gray-500">
+        Completed {mostProductiveDayInsight.count} task(s) on {mostProductiveDayInsight.day}
+      </p>
+    )}
+  </div>
 </div>
 
 <div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">

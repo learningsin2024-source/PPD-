@@ -10,10 +10,10 @@ function Sidebar({ sidelinks }) {
     <>
       {/* Desktop Sidebar */}
       <div
-        className={`hidden md:flex flex-col h-screen bg-slate-950 transition-all
+        className={`hidden md:flex flex-col  bg-slate-950 transition-all
         ${col ? "w-20" : "w-64"}`}
       >
-        <ul className="flex flex-col m-3 text-white space-y-6">
+        <ul className="flex flex-col m-3 text-white text-xl space-y-6">
           {sidelinks.map(link => (
             <Link
               key={link.key}
