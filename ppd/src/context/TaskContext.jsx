@@ -63,6 +63,8 @@ function loadTasks() {
 function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(() => loadTasks());
 
+
+
   // ---------- ACTIONS ----------
   const addTask = (title) => {
     const newTask = {
@@ -82,8 +84,50 @@ function TaskProvider({ children }) {
     (task) => task.completed && task.completedAt
   );
 
-  const completedTasksCount = completedTasksArray.length;
+  
+// ---------- INSIGHT: MOST PRODUCTIVE DAY ----------
+let mostProductiveDayInsight = null;
 
+if (completedTasksArray.length === 0) {
+  mostProductiveDayInsight = {
+    day: null,
+    count: 0,
+    message: "No productivity data yet",
+  };
+} else {
+  const counts = {};
+  let mostFrequentDay = null;
+  let maxCount = 0;
+
+  completedTasksArray.forEach((task) => {
+    const date = new Date(task.completedAt);
+    const weekday = date.toLocaleDateString("en-US", {
+      weekday: "long",
+      timeZone: "UTC",
+    });
+
+    counts[weekday] = (counts[weekday] || 0) + 1;
+
+    if (counts[weekday] > maxCount) {
+      maxCount = counts[weekday];
+      mostFrequentDay = weekday;
+    }
+  });
+
+  mostProductiveDayInsight = {
+    day: mostFrequentDay,
+    count: maxCount,
+    message: `Your most productive day is ${mostFrequentDay}`,
+  };
+}
+
+
+
+
+
+
+  const completedTasksCount = completedTasksArray.length;
+  
  
 
   const pendingTasks = totalTasks - completedTasksCount;
@@ -152,6 +196,7 @@ function TaskProvider({ children }) {
         todayCompletedCount,
         yesterdayCompletedCount,
         todayVsYesterdayInsight,
+          mostProductiveDayInsight,
       }}
     >
       {children}
