@@ -3,9 +3,14 @@ import { useContext } from 'react';
 import { TaskContext } from '../context/TaskContext';
 import { HabitContext } from '../context/HabitContext';
 import Statscard from './statscard';
+import Progressbar from './progressbar';
+import HabitList from './HabitList';
+import TaskList from './TaskList';
 
 function DashboardInsights() {
   const {
+    tasks,
+    setTasks,
     totalTasks,
     completedTasksCount,
     pendingTasks,
@@ -14,8 +19,14 @@ function DashboardInsights() {
     mostProductiveDayInsight,
   } = useContext(TaskContext);
 
-  const { totalHabits, activeStreakCount, habitDoneToday } =
-    useContext(HabitContext);
+  const {
+    habits,
+    setHabits,
+    today,
+    totalHabits,
+    activeStreakCount,
+    habitDoneToday,
+  } = useContext(HabitContext);
 
   return (
     <>
@@ -37,7 +48,6 @@ function DashboardInsights() {
             />
           </div>
         </div>
-
         <div>
           <h2>Habit Insights</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
@@ -59,7 +69,6 @@ function DashboardInsights() {
             />
           </div>
         </div>
-
         <div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">
           <span className="text-2xl">📅</span>
 
@@ -76,7 +85,6 @@ function DashboardInsights() {
             )}
           </div>
         </div>
-
         <div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">
           <span className="text-2xl">
             {todayVsYesterdayInsight.trend === 'up' && '⬆️'}
@@ -96,6 +104,23 @@ function DashboardInsights() {
             {todayVsYesterdayInsight.message}
           </p>
         </div>
+        <Progressbar
+          value={(completedTasksCount / totalTasks) * 100}
+          color="bg-green-500"
+          label="Tasks Completed"
+          showpercent={true}
+        />{' '}
+        <br />
+        <Progressbar
+          value={(habitDoneToday / totalHabits) * 100}
+          color="bg-blue-500"
+          label="Habits Done Today"
+          showpercent={true}
+        />
+        <br />
+        <HabitList habits={habits} setHabits={setHabits} today={today} />
+        <br />
+        <TaskList tasks={tasks} setTasks={setTasks} />
       </div>
     </>
   );

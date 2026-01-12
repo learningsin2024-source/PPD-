@@ -1,7 +1,3 @@
-import { tasks, habits } from "../data";
-
-
-
 function Statscard({ icon, title, value, trend }) {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full">
