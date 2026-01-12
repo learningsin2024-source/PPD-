@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AddTaskForm({ addTask }) {
   const [showModal, setShowModal] = useState(false);
@@ -8,42 +8,64 @@ function AddTaskForm({ addTask }) {
   const handleClose = () => setShowModal(false);
 
   const handleSubmit = () => {
-    if (taskText.trim() === "") return; // ignore empty input
-    addTask(taskText); // call parent function
-    setTaskText("");   // clear input
-    handleClose();     // close modal
+    if (!taskText.trim()) return;
+    addTask(taskText.trim());
+    setTaskText("");
+    handleClose();
   };
+
+  // Close modal on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") handleClose();
+    };
+
+    if (showModal) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showModal]);
 
   return (
     <>
       {/* Button to open modal */}
       <button
         onClick={handleOpen}
-        className="p-3 mb-2 rounded bg-green-500 text-white hover:bg-blue-800 transition"
         type="button"
+        className="p-3 mb-2 rounded bg-green-500 text-white hover:bg-green-600 transition"
       >
         Add Task
       </button>
 
-      {/* Modal Overlay */}
+      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Dark background */}
+          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black bg-opacity-50"
             onClick={handleClose}
-          ></div>
+          />
 
-          {/* Modal Content */}
-          <div className="relative bg-white rounded shadow-lg w-96 max-w-full p-6 z-10 flex flex-col space-y-4">
+          {/* Modal content */}
+          <div
+            className="relative z-10 bg-white rounded shadow-lg w-96 max-w-full p-6 flex flex-col space-y-4"
+            onClick={(e) => e.stopPropagation()} // IMPORTANT
+            role="dialog"
+            aria-modal="true"
+          >
             <h2 className="text-xl font-semibold">Add New Task</h2>
+
             <input
+              autoFocus
               type="text"
               placeholder="Write task here"
               value={taskText}
               onChange={(e) => setTaskText(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
               className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
             />
+
             <div className="flex justify-end space-x-2">
               <button
                 type="button"
@@ -52,6 +74,7 @@ function AddTaskForm({ addTask }) {
               >
                 Cancel
               </button>
+
               <button
                 type="button"
                 onClick={handleSubmit}

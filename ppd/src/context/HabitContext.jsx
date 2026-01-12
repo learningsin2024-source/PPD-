@@ -1,14 +1,14 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect } from 'react';
 
 export const HabitContext = createContext();
 
-const HABITS_KEY = "ppd_habits";
+const HABITS_KEY = 'ppd_habits';
 const today = new Date().toISOString().slice(0, 10);
 
 const MOCK_HABITS = [
-  { id: 1, title: "Working out", history: [today] },
-  { id: 2, title: "Reading", history: [today] },
-  { id: 3, title: "Meditation", history: [] },
+  { id: 1, title: 'Working out', history: [today] },
+  { id: 2, title: 'Reading', history: [today] },
+  { id: 3, title: 'Meditation', history: [] },
 ];
 
 function loadHabits() {
@@ -22,8 +22,8 @@ function loadHabits() {
       !Array.isArray(parsed) ||
       !parsed.every(
         (h) =>
-          typeof h.id === "number" &&
-          typeof h.title === "string" &&
+          typeof h.id === 'number' &&
+          typeof h.title === 'string' &&
           Array.isArray(h.history)
       )
     ) {
@@ -32,7 +32,7 @@ function loadHabits() {
 
     return parsed;
   } catch (error) {
-    console.error("Failed to load habits:", error);
+    console.error('Failed to load habits:', error);
     return MOCK_HABITS;
   }
 }
@@ -51,19 +51,15 @@ function HabitProvider({ children }) {
 
   // Computed stats
   const totalHabits = habits.length;
-  const habitDoneToday = habits.filter((h) =>
-    h.history.includes(today)
-  ).length;
+  const habitDoneToday = habits.filter((h) => h.history.includes(today)).length;
   const activeStreakCount = habitDoneToday;
   const habitCompletion =
-    totalHabits === 0 ? 0 : (habitDoneToday / totalHabits) * 100;
+    totalHabits === 0 ? '0%' : (habitDoneToday / totalHabits) * 100;
 
   // Streak helpers
   const DAY_MS = 24 * 60 * 60 * 1000;
   const addDays = (date, days) =>
-    new Date(date.getTime() + days * DAY_MS)
-      .toISOString()
-      .slice(0, 10);
+    new Date(date.getTime() + days * DAY_MS).toISOString().slice(0, 10);
 
   const getCurrentStreak = (history) => {
     if (!history.includes(today)) return 0;

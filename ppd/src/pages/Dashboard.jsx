@@ -43,7 +43,7 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
             <Statscard icon="📝" title="Tasks Created" trend={totalTasks} />
             <Statscard icon="✅" title="Tasks Completed" trend={completedTasksCount} />
-            { console.log(completedTasksCount)}
+            
             <Statscard icon="⏳" title="Tasks Pending" trend={pendingTasks} />
             <Statscard
               icon="📊"
@@ -62,21 +62,7 @@ const {habits, setHabits, today, totalHabits, activeStreakCount, addHabit, habit
     trend={`${((habitDoneToday / totalHabits) * 100).toFixed(0)}%`}
   />
 </div>
-<div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">
-  <span className="text-2xl">📅</span>
 
-  <div>
-    <p className="font-medium text-gray-800">
-      {mostProductiveDayInsight.message}
-    </p>
-
-    {mostProductiveDayInsight.day && (
-      <p className="text-sm text-gray-500">
-        Completed {mostProductiveDayInsight.count} task(s) on {mostProductiveDayInsight.day}
-      </p>
-    )}
-  </div>
-</div>
 
 <div className="my-4 p-4 rounded-lg bg-white shadow flex items-center gap-3">
   <span className="text-2xl">

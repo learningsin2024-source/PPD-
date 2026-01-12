@@ -196,7 +196,7 @@ if (completedTasksArray.length === 0) {
         todayCompletedCount,
         yesterdayCompletedCount,
         todayVsYesterdayInsight,
-          mostProductiveDayInsight,
+        mostProductiveDayInsight,
       }}
     >
       {children}
