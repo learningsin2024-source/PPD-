@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 function AddTaskForm({ addTask }) {
   const [showModal, setShowModal] = useState(false);
-  const [taskText, setTaskText] = useState("");
+  const [taskText, setTaskText] = useState('');
 
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
@@ -10,21 +10,21 @@ function AddTaskForm({ addTask }) {
   const handleSubmit = () => {
     if (!taskText.trim()) return;
     addTask(taskText.trim());
-    setTaskText("");
+    setTaskText('');
     handleClose();
   };
 
   // Close modal on ESC key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key === 'Escape') handleClose();
     };
 
     if (showModal) {
-      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener('keydown', handleKeyDown);
     }
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showModal]);
 
   return (
@@ -62,7 +62,7 @@ function AddTaskForm({ addTask }) {
               placeholder="Write task here"
               value={taskText}
               onChange={(e) => setTaskText(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
             />
 

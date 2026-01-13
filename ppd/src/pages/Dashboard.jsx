@@ -13,12 +13,17 @@ import { HabitContext } from '../context/HabitContext.jsx';
 import DashboardInsights from '../component/DashboardInsights.jsx';
 
 function Dashboard() {
+  const { addHabit } = useContext(HabitContext);
+  const { addTask } = useContext(TaskContext);
+
   return (
     <>
       <ProfileHeader />
       <div className="space-x-3.5 mb-3.5">
-        <AddHabitForm />
-        <AddTaskForm />
+        <AddTaskForm addTask={addTask} />
+
+        {/* Add Habit Form */}
+        <AddHabitForm addHabit={addHabit} />
       </div>
       <DashboardInsights />
     </>

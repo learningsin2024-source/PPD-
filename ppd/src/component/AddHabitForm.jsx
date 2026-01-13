@@ -1,19 +1,17 @@
-import { useState } from "react"
+import { useState } from 'react';
 
-function AddHabitForm({addHabit}) {
-
-
+function AddHabitForm({ addHabit }) {
   const [showModal, setShowModal] = useState(false);
-  const [habitText, setHabitText] = useState("");
+  const [habitText, setHabitText] = useState('');
 
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   const handleSubmit = () => {
-    if (habitText.trim() === "") return; // ignore empty input
+    if (habitText.trim() === '') return; // ignore empty input
     addHabit(habitText); // call parent function
-    setHabitText("");   // clear input
-    handleClose();     // close modal
+    setHabitText(''); // clear input
+    handleClose(); // close modal
   };
 
   return (
@@ -24,7 +22,7 @@ function AddHabitForm({addHabit}) {
         className="p-3 mb-2 rounded bg-blue-500 text-white hover:bg-blue-800 transition"
         type="button"
       >
-        Add Habit 
+        Add Habit
       </button>
 
       {/* Modal Overlay */}
@@ -69,4 +67,4 @@ function AddHabitForm({addHabit}) {
   );
 }
 
-export default AddHabitForm
+export default AddHabitForm;
