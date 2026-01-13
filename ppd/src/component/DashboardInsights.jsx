@@ -116,11 +116,25 @@ function DashboardInsights() {
           color="bg-blue-500"
           label="Habits Done Today"
           showpercent={true}
-        />
+        />{' '}
         <br />
-        <HabitList habits={habits} setHabits={setHabits} today={today} />
-        <br />
-        <TaskList tasks={tasks} setTasks={setTasks} />
+        <div className="space-y-3.5 r mb-2.5">
+          <br />
+          <h3 className="text-center ">HABITS</h3>
+          <HabitList
+            habits={habits}
+            setHabits={setHabits}
+            today={today}
+            className="bg-white text-black shadow  rounded border-none p-4 m-3"
+          />
+          <br />
+          <h3 className="text-center">TASKS</h3>
+          <TaskList
+            tasks={tasks}
+            setTasks={setTasks}
+            ClassName="bg-white text-black shadow  rounded border-none p-4 m-3"
+          />
+        </div>
       </div>
     </>
   );

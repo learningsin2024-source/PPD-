@@ -22,7 +22,6 @@ function Dashboard() {
       <div className="space-x-3.5 mb-3.5">
         <AddTaskForm addTask={addTask} />
 
-        {/* Add Habit Form */}
         <AddHabitForm addHabit={addHabit} />
       </div>
       <DashboardInsights />

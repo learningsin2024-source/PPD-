@@ -1,48 +1,49 @@
+import HabitItem from './HabitItem';
+import Toast from './toast';
+import { ToastContext } from '../context/ToastContext';
+import { useContext } from 'react';
 
-import HabitItem from "./HabitItem"
-
-function HabitList({habits, setHabits, today}){
-
-
-
+function HabitList({ habits, setHabits, today, className }) {
   const handleDelete = (id) => {
     setHabits(habits.filter((h) => h.id !== id));
   };
 
-const toggleHabitToday = (habitId) => {
+  const toggleHabitToday = (habitId) => {
+    setHabits(
+      habits.map((h) => {
+        if (h.id !== habitId) return h;
 
+        const doneToday = h.history.includes(today);
 
-  setHabits(
-    habits.map((h) => {
-      if (h.id !== habitId) return h;
-
-      const doneToday = h.history.includes(today);
-
-      return {
-        ...h,
-        history: doneToday
-          ? h.history.filter((date) => date !== today) // remove
-          : [...h.history, today],                     // add
-      };
-    })
-  );
-};   return (
-
-<div>
+        return {
+          ...h,
+          history: doneToday
+            ? h.history.filter((date) => date !== today) // remove
+            : [...h.history, today], // add
+        };
+      })
+    );
+  };
+  return (
+    <div className={className}>
       {habits && habits.length > 0 ? (
         habits.map((h) => (
           <HabitItem
             key={h.id}
             habit={h}
-           callbacks={{ onToggle: toggleHabitToday, onDelete: handleDelete }}
-        
+            callbacks={{
+              onToggle: toggleHabitToday,
+              onDelete: handleDelete,
+            }}
           />
         ))
       ) : (
-        <p>No Habits yet.</p>
+        <>
+          <p>No tasks yet. Start building consistency</p>
+        </>
       )}
     </div>
-    )
+  );
 }
 
-export default HabitList
+export default HabitList;
