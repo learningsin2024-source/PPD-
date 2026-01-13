@@ -1,31 +1,39 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
-import Statscard from '../component/statscard';
-import Progressbar from '../component/progressbar';
 import ProfileHeader from '../component/profieheader';
-import AddTaskForm from '../component/AddTaskForm.jsx';
+import AddTaskForm from '../component/AddTaskForm';
+import AddHabitForm from '../component/AddHabitForm';
+import DashboardInsights from '../component/DashboardInsights';
 
-import TaskList from '../component/TaskList.jsx';
-import HabitList from '../component/HabitList.jsx';
-import AddHabitForm from '../component/AddHabitForm.jsx';
-import { TaskContext } from '../context/TaskContext.jsx';
-import { HabitContext } from '../context/HabitContext.jsx';
-import DashboardInsights from '../component/DashboardInsights.jsx';
+import { TaskContext } from '../context/TaskContext';
+import { HabitContext } from '../context/HabitContext';
 
 function Dashboard() {
-  const { addHabit } = useContext(HabitContext);
   const { addTask } = useContext(TaskContext);
+  const { addHabit } = useContext(HabitContext);
 
   return (
-    <>
-      <ProfileHeader />
-      <div className="space-x-3.5 mb-3.5">
-        <AddTaskForm addTask={addTask} />
+    <div className="space-y-10">
+      {/* ===================== PROFILE ===================== */}
+      <section>
+        <ProfileHeader />
+      </section>
 
-        <AddHabitForm addHabit={addHabit} />
-      </div>
-      <DashboardInsights />
-    </>
+      {/* ===================== QUICK ACTIONS ===================== */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <AddTaskForm addTask={addTask} />
+          <AddHabitForm addHabit={addHabit} />
+        </div>
+      </section>
+
+      {/* ===================== DASHBOARD CONTENT ===================== */}
+      <section>
+        <DashboardInsights />
+      </section>
+    </div>
   );
 }
 

@@ -1,59 +1,94 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { SidebarContext } from "../context/SidebarContext";
+import { useContext, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { SidebarContext } from '../context/SidebarContext';
 
 function Sidebar({ sidelinks }) {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
-  const [col, setCol] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+
+  const isActive = (route) => location.pathname === route;
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <div
-        className={`hidden md:flex flex-col  bg-slate-950 transition-all
-        ${col ? "w-20" : "w-64"}`}
+      {/* ===================== DESKTOP SIDEBAR ===================== */}
+      <aside
+        className={`hidden md:flex flex-col bg-slate-950 text-white
+        transition-all duration-300
+        ${collapsed ? 'w-20' : 'w-64'}`}
       >
-        <ul className="flex flex-col m-3 text-white text-xl space-y-6">
-          {sidelinks.map(link => (
-            <Link
-              key={link.key}
-              to={link.route}
-              className="flex items-center space-x-2 hover:text-blue-400"
-            >
-              <span>{link.icon}</span>
-              {!col && <span>{link.name}</span>}
-            </Link>
-          ))}
-        </ul>
+        {/* Brand */}
+        <div className="px-4 py-6 text-xl font-bold tracking-wide border-b border-slate-800">
+          {collapsed ? '⚡' : 'TYZ'}
+        </div>
 
+        {/* Navigation */}
+        <nav className="flex-1 px-3 py-6">
+          <ul className="space-y-2">
+            {sidelinks.map((link) => (
+              <Link
+                key={link.key}
+                to={link.route}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg
+                transition-colors
+                ${
+                  isActive(link.route)
+                    ? 'bg-slate-800 text-blue-400'
+                    : 'hover:bg-slate-900'
+                }`}
+              >
+                <span className="text-xl">{link.icon}</span>
+                {!collapsed && (
+                  <span className="text-sm font-medium">{link.name}</span>
+                )}
+              </Link>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Collapse Button */}
         <button
-          onClick={() => setCol(!col)}
-          className="mt-auto p-2 text-white hover:bg-slate-900"
+          onClick={() => setCollapsed(!collapsed)}
+          className="m-3 px-3 py-2 rounded-lg text-sm
+          bg-slate-900 hover:bg-slate-800 transition"
         >
-          {col ? "➡ Expand" : "⬅ Collapse"}
+          {collapsed ? '➡ Expand' : '⬅ Collapse'}
         </button>
-      </div>
+      </aside>
 
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-slate-950
+      {/* ===================== MOBILE SIDEBAR ===================== */}
+      <aside
+        className={`fixed top-0 left-0 z-50 h-full w-64 bg-slate-950 text-white
         transform transition-transform duration-300 md:hidden
-        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <ul className="flex flex-col m-3 text-white space-y-6">
-          {sidelinks.map(link => (
-            <Link
-              key={link.key}
-              to={link.route}
-              onClick={closeSidebar}
-              className="flex items-center space-x-2 hover:text-blue-400"
-            >
-              <span className="text-2xl">{link.icon}</span>
-              <span>{link.name}</span>
-            </Link>
-          ))}
-        </ul>
-      </div>
+        {/* Mobile Header */}
+        <div className="px-4 py-5 text-xl font-bold border-b border-slate-800">
+          TYZ
+        </div>
+
+        <nav className="px-3 py-6">
+          <ul className="space-y-3">
+            {sidelinks.map((link) => (
+              <Link
+                key={link.key}
+                to={link.route}
+                onClick={closeSidebar}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg
+                transition-colors
+                ${
+                  isActive(link.route)
+                    ? 'bg-slate-800 text-blue-400'
+                    : 'hover:bg-slate-900'
+                }`}
+              >
+                <span className="text-xl">{link.icon}</span>
+                <span className="text-sm font-medium">{link.name}</span>
+              </Link>
+            ))}
+          </ul>
+        </nav>
+      </aside>
     </>
   );
 }
