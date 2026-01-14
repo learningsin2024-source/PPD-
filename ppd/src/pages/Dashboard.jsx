@@ -4,6 +4,7 @@ import ProfileHeader from '../component/profieheader';
 import AddTaskForm from '../component/AddTaskForm';
 import AddHabitForm from '../component/AddHabitForm';
 import DashboardInsights from '../component/DashboardInsights';
+import ToastList from '../context/ToastList.jsx';
 
 import { TaskContext } from '../context/TaskContext';
 import { HabitContext } from '../context/HabitContext';
@@ -33,6 +34,7 @@ function Dashboard() {
       <section>
         <DashboardInsights />
       </section>
+      <ToastList />
     </div>
   );
 }

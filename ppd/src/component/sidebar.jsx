@@ -19,7 +19,7 @@ function Sidebar({ sidelinks }) {
       >
         {/* Brand */}
         <div className="px-4 py-6 text-xl font-bold tracking-wide border-b border-slate-800">
-          {collapsed ? '⚡' : 'TYZ'}
+          {collapsed ? '⚡' : 'PPD'}
         </div>
 
         {/* Navigation */}
