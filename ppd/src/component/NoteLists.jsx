@@ -12,9 +12,11 @@ function NoteList({ notes, deleteNote, className }) {
           />
         ))
       ) : (
-        <p className="text-center text-red-600">
-          No notes yet. Create your first note.
-        </p>
+        <div className="col-span-full rounded-lg border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+          <p className="text-gray-500">
+            No notes yet. Create your first note ✨
+          </p>
+        </div>
       )}
     </div>
   );

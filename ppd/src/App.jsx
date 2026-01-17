@@ -6,6 +6,7 @@ import Setting from './pages/settings.jsx';
 import Navbar from './component/navbar';
 import Sidebar from './component/sidebar';
 import Notes from './pages/Notes.jsx';
+import Tasks from './pages/Tasks.jsx';
 
 function App() {
   // Sidebar and Navbar links
@@ -40,6 +41,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<Setting />} />
             <Route path="/notes" element={<Notes />} />
+            <Route path="/tasks" element={<Tasks />} />
           </Routes>
         </main>
       </div>

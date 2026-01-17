@@ -5,16 +5,34 @@ export const NotesContext = createContext();
 function NotesProvider({ children }) {
   const [notes, setNotes] = useState([
     {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       title: '2026 new year plan',
       content: 'this is a new year plan, I am going to do a lot of things',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+
+    {
+      id: crypto.randomUUID(),
+      title: '2026 c plan',
+      content:
+        'Making effective short notes involves a systematic approach. Begin by skimming the material to identify key points and headings. Use abbreviations, symbols, and keywords to condense information.',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+
+    {
+      id: crypto.randomUUID(),
+      title: '2026 c plan',
+      content:
+        'Making effective short notes involves a systematic approach. Begin by skimming the material to identify key points and headings. Use abbreviations, symbols, and keywords to condense information.',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
   ]);
 
   function deleteNote(id) {
-    setNotes((prev) => prev.filter((note) => note.id !== id));
+    setNotes(notes.filter((note) => note.id !== id));
   }
 
   function updateNote(id, title, content) {
