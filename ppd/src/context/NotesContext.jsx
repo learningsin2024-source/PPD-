@@ -13,47 +13,36 @@ function NotesProvider({ children }) {
     },
   ]);
 
-  function deleteNotes(id) {
-    notes.filter((note) => note.id !== id);
+  function deleteNote(id) {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
   }
 
   function updateNote(id, title, content) {
     setNotes((prev) =>
       prev.map((note) =>
         note.id === id
-          ? {
-              ...note,
-              title,
-              content,
-              updatedAt: new Date().toISOString(),
-            }
+          ? { ...note, title, content, updatedAt: new Date().toISOString() }
           : note
       )
     );
   }
 
-  function addNotes(title, content) {
-    const newNotes = {
-      id: new Date.now(),
+  function addNote(title, content) {
+    const now = new Date().toISOString();
+
+    const newNote = {
+      id: Date.now(),
       title,
       content,
-      createdAt: new Date().toLocaleDateString(),
-      updatedAt: 'later',
+      createdAt: now,
+      updatedAt: now,
     };
 
-    setNotes((prev) => [...prev, newNotes]);
+    setNotes((prev) => [...prev, newNote]);
   }
 
   return (
-    <NotesContext.Provider
-      value={{
-        notes,
-        setNotes,
-        addNotes,
-        updateNote,
-        deleteNotes,
-      }}
-    >
+    <NotesContext.Provider value={{ notes, addNote, updateNote, deleteNote }}>
       {children}
     </NotesContext.Provider>
   );

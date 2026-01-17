@@ -1,11 +1,7 @@
-
-
-
 function TaskItem({ task, callbacks }) {
-  if (!task) return null; // safety check
+  if (!task) return null;
 
-
-  const { id, title, completed, completedAt} = task;
+  const { id, title, completed, completedAt } = task;
   const { onToggle, onDelete } = callbacks;
 
   return (
@@ -13,11 +9,10 @@ function TaskItem({ task, callbacks }) {
       <div className="flex items-center space-x-2">
         <input
           type="checkbox"
-          checked={completed }
+          checked={completed}
           onChange={() => onToggle(id)}
         />
-        <p className={completed  ? "line-through text-gray-400" : ""}>{title}</p>
-     
+        <p className={completed ? 'line-through text-gray-400' : ''}>{title}</p>
       </div>
       <button
         onClick={() => onDelete(id)}
@@ -30,4 +25,3 @@ function TaskItem({ task, callbacks }) {
 }
 
 export default TaskItem;
-
