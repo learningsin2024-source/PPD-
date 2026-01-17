@@ -1,17 +1,14 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useContext, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { UserContext } from "../context/UserContext";
-import { SidebarContext } from "../context/SidebarContext";
+import { UserContext } from '../context/UserContext';
+import { SidebarContext } from '../context/SidebarContext';
 
 function Navbar({ links }) {
-
-  
-
-
   const [openHeader, setOpenHeader] = useState(false);
   const { user, updateUser } = useContext(UserContext);
-  const { isSidebarOpen, closeSidebar,toggleSidebar, openSidebar } = useContext(SidebarContext);
+  const { isSidebarOpen, closeSidebar, toggleSidebar, openSidebar } =
+    useContext(SidebarContext);
 
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
@@ -23,26 +20,28 @@ function Navbar({ links }) {
         setOpenHeader(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   useEffect(() => {
-  console.log("Sidebar open:", isSidebarOpen);
-}, [isSidebarOpen]);
+    console.log('Sidebar open:', isSidebarOpen);
+  }, [isSidebarOpen]);
 
   return (
     <nav className="w-full bg-slate-950 z-20 top-0 border-b border-gray-700">
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center p-4 text-white">
-        
         {/* Logo */}
-        <div className="text-xl font-bold cursor-pointer" onClick={() => navigate("/")}>
+        <div
+          className="text-xl font-bold cursor-pointer"
+          onClick={() => navigate('/')}
+        >
           PPD
         </div>
 
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-6">
-          {links.map(link => (
+          {links.map((link) => (
             <li
               key={link.key}
               className="cursor-pointer hover:text-blue-400 hover:underline"
@@ -72,13 +71,19 @@ function Navbar({ links }) {
               tabIndex="0"
             >
               <ul>
-                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">👤 {user?.username}</li>
-                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">📧 {user?.email}</li>
-                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">🕒 {user?.joinedDate}</li>
+                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">
+                  👤 {user?.username}
+                </li>
+                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">
+                  📧 {user?.email}
+                </li>
+                <li className="inline-flex items-center w-full p-2 cursor-pointer hover:bg-slate-950">
+                  🕒 {user?.joinedDate}
+                </li>
                 <li>
                   <button
                     className="p-2 m-2 bg-slate-950 text-white rounded w-full"
-                    onClick={() => navigate("/profile")}
+                    onClick={() => navigate('/profile')}
                   >
                     Edit Details
                   </button>
@@ -96,7 +101,6 @@ function Navbar({ links }) {
           >
             ☰
           </button>
-    
         </div>
       </div>
     </nav>

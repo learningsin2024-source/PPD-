@@ -12,15 +12,14 @@ function App() {
     { key: 1, name: 'Dashboard', icon: '🏠', route: '/' },
     { key: 2, name: 'Tasks', icon: '✅', route: '/tasks' },
     { key: 3, name: 'Notes', icon: '📝', route: '/notes' },
-    { key: 4, name: 'Timer', icon: '⏱', route: '/timer' },
     { key: 5, name: 'Settings', icon: '⚙️', route: '/settings' },
   ];
 
   const links = [
-    { name: 'Dashboard', route: '/', key: 1 },
-    { name: 'Tasks', route: '/tasks', key: 2 },
-    { name: 'Notes', route: '/notes', key: 3 },
-    { name: 'Timer', route: '/timer', key: 4 },
+    { name: 'Dashboard', path: '/', key: 1 },
+    { name: 'Tasks', path: '/tasks', key: 2 },
+    { name: 'Notes', path: '/notes', key: 3 },
+    { name: 'settings', path: '/settings', key: 4 },
   ];
 
   return (
