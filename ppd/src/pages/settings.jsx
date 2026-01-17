@@ -5,6 +5,7 @@ function Setting() {
   return (
     <>
       <ProfilePage />
+
       <Reset />
     </>
   );

@@ -32,7 +32,9 @@ function TaskList({ tasks, setTasks, ClassName }) {
           />
         ))
       ) : (
-        <p>No tasks yet. Create your first task to see stats </p>
+        <p className="text-center text-red-600">
+          No tasks yet. Create your first task to see stats{' '}
+        </p>
       )}
     </div>
   );

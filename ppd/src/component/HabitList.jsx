@@ -39,7 +39,9 @@ function HabitList({ habits, setHabits, today, className }) {
         ))
       ) : (
         <>
-          <p>No tasks yet. Start building consistency</p>
+          <p className="text-center text-red-600">
+            No tasks yet. Start building consistency
+          </p>
         </>
       )}
     </div>
