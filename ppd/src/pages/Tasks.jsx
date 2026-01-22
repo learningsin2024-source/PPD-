@@ -7,7 +7,7 @@ function Tasks() {
 
   return (
     <div className="">
-      <h4 className="text-2xl text-center  mb-2.5s">Tasks Created</h4>
+      <h4 className="text-2xl text-center font-sans mb-2.5s">Tasks Created</h4>
       <TaskList tasks={tasks} setTasks={setTasks}></TaskList>;
     </div>
   );
