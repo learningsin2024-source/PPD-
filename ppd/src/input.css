@@ -1,17 +1,1 @@
 @import "tailwindcss";
-
-html {
-  font-size: 100%;          
-}
-
-body {
-  margin: 0;
-  font-family: inherit;    
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-}
