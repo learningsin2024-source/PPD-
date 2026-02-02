@@ -1,22 +1,25 @@
+
 {
-  "name": "ppd",
-  "private": true,
+  "name": "ppd-project",
+   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "cd ppd/ppd && vite",
+    "build": "cd ppd/ppd && vite build",
+     "lint": "eslint .",
+    "preview": "cd ppd/ppd && vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
+    "tailwindcss": "^4.1.17",
+    "vite": "^7.2.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.6",
-    "tailwindcss": "^4.1.17"
+    "react-router-dom": "^7.9.6"
   },
-  "devDependencies": {
+
+   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -28,3 +31,16 @@
     "vite": "^7.2.4"
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
