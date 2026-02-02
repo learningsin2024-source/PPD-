@@ -6,3 +6,27 @@ body{
     padding: 0;
     font-family: "poppins", sans-serif;
 }
+
+/* src/index.css */
+@import "tailwindcss";
+
+@theme {
+  --spacing: 0.225rem;
+}
+
+html {
+  font-size: 15px;
+  @apply antialiased;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100;
+  }
+}
+
+@layer components {
+  .card {
+    @apply p-4 bg-gray-800 rounded-lg shadow;
+  }
+}
