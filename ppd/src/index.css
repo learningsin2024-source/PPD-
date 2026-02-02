@@ -7,26 +7,27 @@ body{
     font-family: "poppins", sans-serif;
 }
 
-/* src/index.css */
 @import "tailwindcss";
 
 @theme {
-  --spacing: 0.225rem;
+  --spacing: 0.2rem;
 }
 
 html {
-  font-size: 15px;
+  font-size: 14px;
   @apply antialiased;
 }
 
 @layer base {
   body {
-    @apply bg-gray-950 text-gray-100;
+    @apply bg-gray-950 text-black;
   }
 }
 
-@layer components {
-  .card {
-    @apply p-4 bg-gray-800 rounded-lg shadow;
-  }
+/* Optional: make headings a bit smaller too */
+h1, h2, h3, h4 {
+  @apply font-medium tracking-tight;
 }
+
+h1 { @apply text-2xl; }  /* instead of default larger */
+h2 { @apply text-xl; }

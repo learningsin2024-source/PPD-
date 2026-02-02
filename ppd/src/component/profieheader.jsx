@@ -1,11 +1,13 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { useState, useContext, useN } from 'react';
+import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileHeader({ statuss }) {
   const [icons, setIcons] = useState(false);
 
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
+  const navigate = useNavigate();
 
   return (
     <>
@@ -37,19 +39,31 @@ function ProfileHeader({ statuss }) {
       {/* Dropdown Menu */}
       {icons && (
         <div className="mx-2 bg-slate-800 text-white rounded-lg shadow p-3 space-y-2 animate-fadeIn mb-2.5">
-          <button className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded">
+          <button
+            className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded"
+            onClick={() => navigate('/settings')}
+          >
             ✏️ Edit profile
           </button>
 
-          <button className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded">
+          <button
+            className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded"
+            onClick={() => navigate('/settings')}
+          >
             🖼️ Change photo
           </button>
 
-          <button className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded">
+          <button
+            className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded"
+            onClick={() => navigate('/settings')}
+          >
             ⚙️ Settings
           </button>
 
-          <button className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded">
+          <button
+            className="text-left hover:bg-slate-700 w-full px-2 py-1 rounded"
+            onClick={() => navigate('/settings')}
+          >
             🚪 Logout
           </button>
         </div>
